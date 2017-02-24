@@ -1,0 +1,148 @@
+<html>
+	<link rel="stylesheet" href="style.css">
+  	<embed src="Sounds/soma.mp3" autostart="true" loop="true" hidden="true">  
+	<head>
+		<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<title>TERMINAL 2</title>
+	</head>
+	<p>TERMINAL 2</p><br><br><br>
+	<div class="status">
+		<div class="mainStatus">Main Power: <font color="red">OFFLINE</font></div>
+		<div class="auxStatus">Aux Power: <font color="red">OFFLINE</font></div>
+		<div class="lightsStatus">Lights: <font color="red">OFFLINE</font></div>
+		<div class="doorStatus">Door Control: <font color="red">OFFLINE</font></div>
+		<div class="commsStatus">Communications: <font color="red">OFFLINE</font></div>
+		<div class="localStatus">Local Data: <font color="green">ONLINE</font></div>
+	</div>
+	<br><br>
+	<div class="options">
+		<button class="lights">Lights</button>
+		<button class="doors">Door Control</button>
+		<button class="comms">Communications</button>
+		<button class="local">Local Data</button>
+		<button class="cls">Clear Screen</button>
+		<script type="text/javascript">
+			var doorsOn = false;
+			var lightsOn = false;
+			var powerOn = false;
+			var sequence = "";
+			var keyboard_sound = new Audio('Sounds/keyboard.wav');
+			function unlockDoor() {
+				keyboard_sound.play();
+				if (document.getElementById('doorCode').value == "0451")
+				{
+					doorsOn = true;
+					$( ".next" ).append("<p><font color=\"green\">Door Unlocked</font>");
+					$(".doorStatus").replaceWith("<div id=\"doorStatus\">Door Control: <font color=\"green\">ONLINE</font></div>");
+					$( ".next" ).append("<button onclick=\"leaveRoom()\" class=\"leave\">Leave Room</button>");
+				}
+				else
+					$( ".next" ).append("<p><font color=\"red\">Code Incorrect</font>");
+			}
+			function lightSwitch(switchNum){
+				keyboard_sound.play();
+				if (switchNum == "0")
+					sequence = "";
+				else
+				{
+					sequence = sequence + switchNum;
+					if (sequence == "158")
+					{
+						lightsOn = true;
+						$( ".next" ).append("<p><font color=\"green\">Lights On</font>");
+						$(".lightsStatus").replaceWith("<div class=\"lightsStatus\">Lights: <font color=\"green\">ONLINE</font></div>");
+						window.alert("The lights in the room flicker on, leaving the room light enough to see, but only just.  Your take in your surroundings.  Nothing much stands out.  Above your computer, you see a sheet of paper with a table of numbers.  All are crossed out except one: Alex - 134.47")
+					}
+				}	
+			}
+			function leaveRoom() {
+				window.alert("The door slids open to a pitch black hallway.  You check both directions, but all you can make out is the faint pulsing of a few lights further down the hallway.  Not enough to see by.  As you step forward your foot kicks something.  You reach down and fumble for it, lifting up aflashlight.  It turns on once you grasp it, illuminating your path.  Off to your right, you see a window, just barely illiminated by your light.  A fish swims up to it, staring blankly at your light, then swims off into the seemingly infinite, dark ocean.  Further down the hallyway, you see a room labled \"Jenn - Maintainence\"");
+				window.alert("The room is a mess.  Wiring and tools are sprawled accross the floor.  Most of it looks smashed.  A body - Jenn's - lies in bed, clutching a small tablet.  You pick it up.  Various indecipherable UI elements litter the screen, but one sticks out: a green Start Aux Power button.  You press it")
+				window.alert("A few light strips turn on here and there.  The place is still dark.  You head back.")
+				powerOn = true;
+				$(".auxStatus").replaceWith("<div id=\"auxStatus\">Aux Power: <font color=\"green\">ONLINE</font></div>");
+				$(".commsStatus").replaceWith("<div id=\"commsStatus\">Communications: <font color=\"green\">ONLINE</font></div>");
+
+			}
+			function contactFreq() {
+				if (document.getElementById('frequency').value == "134.47")
+					window.location.href = "alex.html";
+				else
+					$( ".next" ).append("<p><font color=\"red\">Error - Station offline</font>");
+			}
+			function openDoc(docNum) {
+				if (docNum == "1")
+				{
+					window.alert("\"We've blown a circuit again, because of course we have.  Three weeks on nothing but reserve power means everything we've got is running on edge.  I don't know how Alex does it, her office hasn't had lights for weeks and she's still there, hammering away on the ARK.  Had a pressure colapse near her lab a few days ago and it nearly flooded the office.  We can't even get to that wing anymore; it's just a part of the ocean now.  Yet somehow, Alex says she's only got a few scans left, and then she can upload herself.  I don't undertand how she's so unphased by all this...\"");
+					window.alert("\"Whatever.  I figured out a quick way to reset the lights.  Throw switches one, five, and eight, and it should come back online.  I can worry about my scan when they get to me.\"");
+				}
+				else
+					window.alert("\"Today's power failure fried the security system, so we had to go around resetting all the codes today.  I could get them working on all of them except the door to my office, weirdly enough.  Code keeps defaulting back to 0451 no matter how many times I try to change it.  I should get Jenn down here, she knows the wiring at this place better than me at this point, but with half the station flooded, who knows if she can even make it.\"");
+
+			}
+			$(function() {
+				$(".lights").on("click", function() {
+					keyboard_sound.play();
+					$( ".next" ).replaceWith("<div class=\"next\">");
+					if (lightsOn)
+						$( ".next" ).append("<br>Alex -  134.47<br>");
+					else
+					{
+						if (powerOn)
+						{
+							$( ".next" ).append("<br>Eight switches appear on screen.<br>");
+							$( ".next" ).append("<button onclick=\"lightSwitch(1)\" class=\"light\">1</button>");
+							$( ".next" ).append("<button onclick=\"lightSwitch(2)\" class=\"light\">2</button>");
+							$( ".next" ).append("<button onclick=\"lightSwitch(3)\" class=\"light\">3</button>");
+							$( ".next" ).append("<button onclick=\"lightSwitch(4)\" class=\"light\">4</button>");
+							$( ".next" ).append("<button onclick=\"lightSwitch(5)\" class=\"light\">5</button>");
+							$( ".next" ).append("<button onclick=\"lightSwitch(6)\" class=\"light\">6</button>");
+							$( ".next" ).append("<button onclick=\"lightSwitch(7)\" class=\"light\">7</button>");
+							$( ".next" ).append("<button onclick=\"lightSwitch(8)\" class=\"light\">8</button>");
+							$( ".next" ).append("<button onclick=\"lightSwitch(0)\" class=\"light\">Reset</button>");
+						}
+						else
+							$( ".next" ).append("<br><font color=\"red\">Main power down, lights disabled</font>");
+					}
+					$( ".next" ).append("</div>");
+				})
+				$(".doors").on("click", function() {
+					keyboard_sound.play();
+					$( ".next" ).replaceWith("<div class=\"next\">");
+					$( ".next" ).append("<p>Enter Door Code:");
+					$( ".next" ).append("<input type=\"text\" id=\"doorCode\">");
+					$( ".next" ).append("<button onclick=\"unlockDoor()\" class=\"unlock\">Unlock</button>");
+					$( ".next" ).append("</div>");
+
+				})
+				$(".comms").on("click", function() {
+					keyboard_sound.play();
+					$( ".next" ).replaceWith("<div class=\"next\">");
+					if (!powerOn)
+						$( ".next" ).append("<br><font color=\"red\">Main power down, comms disabled</font>");
+					else
+					{
+						$( ".next" ).append("<p>Contact Frequency:");
+						$( ".next" ).append("<input type=\"text\" id=\"frequency\">");
+						$( ".next" ).append("<button onclick=\"contactFreq()\" class=\"frequ\">Call</button>");
+					}
+					$( ".next" ).append("</div>");
+				})
+				$(".local").on("click", function() {
+					$( ".next" ).replaceWith("<div class=\"next\">");
+					keyboard_sound.play();
+					$( ".next" ).append("<p>Loading...");
+					$( ".next" ).append("<p>Local file system loaded to memory.<p>Select a file to view.");
+					$( ".next" ).append("<button onclick=\"openDoc(1)\" class=\"document\">1. Lights Broken Again</button><br>");
+					$( ".next" ).append("<button onclick=\"openDoc(2)\" class=\"document\">2. Door Locked Up</button>");
+					$( ".next" ).append("</div>");
+				})
+				$(".cls").on("click", function() {
+					keyboard_sound.play();
+					$( ".next" ).replaceWith("<div class=\"next\"></div>");
+				});
+			});
+		</script>
+	</div>
+	<div class="next"></div>
+</html>
