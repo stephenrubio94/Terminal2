@@ -1,7 +1,4 @@
 -Pauses music when opening dialog boxes
-	-Move away from dialog boxes
--Sound effect for power turning on
--Merge Alex HTML into the same page
--Set door to unlocked once correct code is entered
--Error invalid code repeats on door unlock
+-[Done]Sound effect for power turning on
+-[Done]Set door to unlocked once correct code is entered
 -Change Alex writing with new plot

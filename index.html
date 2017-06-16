@@ -1,6 +1,6 @@
 <html>
 	<link rel="stylesheet" href="style.css">
-  	<embed src="Sounds/soma.mp3" autostart="true" loop="true" hidden="true">  
+  	<embed src="Sounds/soma.mp3" autostart="true" loop="true" hidden="true">
 	<head>
 		<script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 		<title>//TERMINAL 2</title>
@@ -27,6 +27,7 @@
 			var powerOn = false;
 			var sequence = "";
 			var keyboard_sound = new Audio('Sounds/keyboard.wav');
+			var power_on = new Audio('Sounds/poweron.wav');
 			function unlockDoor() {
 				keyboard_sound.play();
 				if (document.getElementById('doorCode').value == "0451")
@@ -37,7 +38,9 @@
 					$( ".next" ).append("<button onclick=\"leaveRoom()\" class=\"leave\">Leave Room</button>");
 				}
 				else
+				{
 					$( ".next" ).append("<p><font color=\"red\">Code Incorrect</font>");
+				}
 			}
 			function lightSwitch(switchNum){
 				keyboard_sound.play();
@@ -52,8 +55,9 @@
 						$( ".next" ).append("<p><font color=\"green\">Lights On</font>");
 						$(".lightsStatus").replaceWith("<div class=\"lightsStatus\">Lights: <font color=\"green\">ONLINE</font></div>");
 						window.alert("The lights in the room flicker on, leaving the room light enough to see, but only just.  Your take in your surroundings.  Nothing much stands out.  Above your computer, you see a sheet of paper with a table of numbers.  All are crossed out except one: Alex - 134.47")
+						$( ".next" ).append("<br>Alex -  134.47<br>");
 					}
-				}	
+				}
 			}
 			function leaveRoom() {
 				window.alert("The door slids open to a pitch black hallway.  You check both directions, but all you can make out is the faint pulsing of a few lights further down the hallway.  Not enough to see by.  As you step forward your foot kicks something.  You reach down and fumble for it, lifting up aflashlight.  It turns on once you grasp it, illuminating your path.  Off to your right, you see a window, just barely illiminated by your light.  A fish swims up to it, staring blankly at your light, then swims off into the seemingly infinite, dark ocean.  Further down the hallyway, you see a room labled \"Jenn - Maintainence\"");
@@ -62,6 +66,7 @@
 				powerOn = true;
 				$(".auxStatus").replaceWith("<div id=\"auxStatus\">Aux Power: <font color=\"green\">ONLINE</font></div>");
 				$(".commsStatus").replaceWith("<div id=\"commsStatus\">Communications: <font color=\"green\">ONLINE</font></div>");
+				power_on.play();
 
 			}
 			function contactFreq() {
@@ -109,10 +114,19 @@
 				$(".doors").on("click", function() {
 					keyboard_sound.play();
 					$( ".next" ).replaceWith("<div class=\"next\">");
-					$( ".next" ).append("<p>Enter Door Code:");
-					$( ".next" ).append("<input type=\"text\" id=\"doorCode\">");
-					$( ".next" ).append("<button onclick=\"unlockDoor()\" class=\"unlock\">Unlock</button>");
-					$( ".next" ).append("</div>");
+					if (!doorsOn)
+					{
+						$( ".next" ).append("<p>Enter Door Code:");
+						$( ".next" ).append("<input type=\"text\" id=\"doorCode\">");
+						$( ".next" ).append("<button onclick=\"unlockDoor()\" class=\"unlock\">Unlock</button>");
+						$( ".next" ).append("</div>");
+					}
+					else
+					{
+						$( ".next" ).append("<p><font color=\"green\">Door Unlocked</font>");
+						$(".doorStatus").replaceWith("<div id=\"doorStatus\">Door Control: <font color=\"green\">ONLINE</font></div>");
+						$( ".next" ).append("<button onclick=\"leaveRoom()\" class=\"leave\">Leave Room</button>");
+					}
 
 				})
 				$(".comms").on("click", function() {
