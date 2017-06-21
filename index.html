@@ -78,12 +78,14 @@
 			function openDoc(docNum) {
 				if (docNum == "1")
 				{
-					window.alert("\"We've blown a circuit again, because of course we have.  Three weeks on nothing but reserve power means everything that isn't already fucked is a few days away from being fucked.  Alex doesn't seem bothered.  Half the time, the lights in her office aren't even working.  As long as her terminal has power, she doesn't care.  Had a pressure collapse near her lab a few days ago and it nearly flooded the place.  We can't even get to that wing anymore; it's just a part of the ocean now.  We  checked to see if Alex was okay, but she was there, coding away.  She said, \"I've almost got its vocabulary up to 600 words.  Please leave me alone.\"  I don't think she even noticed.\"");
-					window.alert("\"Whatever.  I figured out a quick way to reset the lights.  Throw switches one, five, and eight, and it should come back online.  I can worry about my scan when they get to me.\"");
+					$( ".next" ).replaceWith("<div class=\"next\">");
+					$( ".next" ).append("<p>1. Lights Broken</br></br>We've blown a circuit again, because of course we have.  Three weeks on nothing but reserve power means everything that isn't already fucked is a few days away from being fucked.  Alex doesn't seem bothered.  Half the time, the lights in her office aren't even working.  As long as her terminal has power, she doesn't care.  Had a pressure collapse near her lab a few days ago and it nearly flooded the place.  We can't even get to that wing anymore; it's just a part of the ocean now.  We  checked to see if Alex was okay, but she was there, coding away.  She said, \"I've almost got its vocabulary up to 600 words.  Please leave me alone.\"  I don't think she even noticed.</br></br>Whatever.  I figured out a quick way to reset the lights.  Throw switches one, five, and eight, and it should come back online.  I can worry about my scan when they get to me.");
 				}
 				else
-					window.alert("\"Today's power failure fried the security system, so we had to go around resetting all the codes today.  I could get them working on all of them except the door to my office, weirdly enough.  Code keeps defaulting back to 0451 no matter how many times I try to change it.  I should get Jenn down here, she knows the wiring at this place better than me at this point, but with half the station flooded, who knows if she can even make it.\"");
-
+				{
+					$( ".next" ).replaceWith("<div class=\"next\">");
+					$( ".next" ).append("<p>2. Door Locked Up</br></br>Today's power failure fried the security system, so we had to go around resetting all the codes today.  I could get them working on all of them except the door to my office, weirdly enough.  Code keeps defaulting back to 0451 no matter how many times I try to change it.  I should get Jenn down here, she knows the wiring at this place better than me at this point, but with half the station flooded, who knows if she can even make it.");
+				}
 			}
 			$(function() {
 				$(".lights").on("click", function() {

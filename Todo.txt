@@ -1,4 +1,0 @@
--Pauses music when opening dialog boxes
--[Done]Sound effect for power turning on
--[Done]Set door to unlocked once correct code is entered
--Change Alex writing with new plot
